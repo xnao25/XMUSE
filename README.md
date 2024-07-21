@@ -15,10 +15,10 @@ miXture Models for nUcleic acid SequencE analysis. Our paper about using mixture
 2. Run jupyter notebook
 3. Open Analyze human intron sequence features.ipynb
 ### Using Xmuse as a command line tool
-Check out the `example_info.md` in the `example` folder.
-3. `cd example`
-4. `python3 ../xmuse.py -if intron_vs_exon_ASC.fa -it intron_vs_exon_label.txt -m ASC -k 4 -t 4 -sw 4 -o ASC_result/`
-5. More information can be found [here](example/example_info.md)
+4. Check out the `example_info.md` in the `example` folder.
+5. `cd example`
+6. `python3 ../xmuse.py -if intron_vs_exon_ASC.fa -it intron_vs_exon_label.txt -m ASC -k 4 -t 4 -sw 4 -o ASC_result/`
+7. More information can be found [here](example/example_info.md)
 
 ## Overview
 Xmuse is a flexible and robust tool to study biological sequence features using mixture models/latent Dirichlet allocation. Xmuse is adaptable for multiple types of sequence feature searching tasks:
