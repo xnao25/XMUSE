@@ -5,6 +5,7 @@
 - intron_vs_exon_UWSC.fa: A fasta file containing 1000 intron sequences that cover the region from 80bp to 10bp upstream of annotated 3'SS and 1000 exon sequences that cover the region from 10bp to 80bp downstream of annotated 3'SS. This file is made for the model fitting step in UWSC analysis.
 - intron_vs_exon_UWSC_test.fa: A fasta file containing 300 intron sequences and 300 exon sequences from the same region in `intron_vs_exon_UWSC.fa` file. This file is made for the model testing and new data transformation in UWSC analysis.
 
+- pickle files from below are removed from this repo due to size limit
 ## Commands:
 ### Aligned Sequence Characterization:
 #### model fitting:

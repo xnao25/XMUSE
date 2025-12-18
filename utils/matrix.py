@@ -13,7 +13,7 @@ def ASC(sequences,k,labels,sliding_window=0,block=False,block_size=5,block_slide
     newlabels=[]
     num_positions=len(sequences[0])-k-sliding_window+1
     possible_kmers=generate_kmers(k)
-    combine_matrix=[]
+    combine_matrix=np.matrix([])
     for x in set(labels):
         output_matrix = np.zeros((num_positions, len(possible_kmers)))
         for y in range(num_positions):
@@ -26,17 +26,17 @@ def ASC(sequences,k,labels,sliding_window=0,block=False,block_size=5,block_slide
                 for j in range(sliding_window+1):
                     the_kmer=seq[i+j:i+j+k]
                     output_matrix[i,possible_kmers.index(the_kmer)]+=1
-        if combine_matrix==[]:
+        if combine_matrix.shape==np.matrix([]).shape:
             combine_matrix=output_matrix
         else:
             combine_matrix=np.concatenate((combine_matrix,output_matrix),axis=0)
     return combine_matrix,newlabels,pd.DataFrame(combine_matrix,index=newlabels,columns=possible_kmers)
 
-def UWSC(sequences,k,labels,sliding_window=0,subgroup_size=1):
+def UWSC(sequences,k,labels,sliding_window=0,subgroup_size=1,singlechar='ACGT'):
     '''
     Make sequence/subgroup - k-mer count matrix for Unaligned Whole Sequence Characterization LDA analysis. The k-mer counts for single sequences or subgroup of sequences will be summarized.
     '''
-    possible_kmers=generate_kmers(k)
+    possible_kmers=generate_kmers(k,singlechar)
     output_matrix=np.zeros((int(len(sequences)/subgroup_size),len(possible_kmers)))
     newlabels=[]
     dfseq=pd.DataFrame()

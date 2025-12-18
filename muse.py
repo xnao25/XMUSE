@@ -10,7 +10,7 @@ from sklearn.preprocessing import StandardScaler
 from utils import matrix,plot
 
 class muse:
-    def __init__(self, mode, k, sequences, labels, sliding_window=0, subgroup_size=1, topic_size=6,rs=0,decay=.7,matrix=None,startpos=0):
+    def __init__(self, mode, k, sequences, labels, sliding_window=0, subgroup_size=1, topic_size=6,rs=0,decay=.7,matrix=None,startpos=0,singlechar='ACGT'):
         '''
         Initialize the muse class.
         mode: choose from ASC, AWSC, UWSC for different nucleotide analysis problems
@@ -39,6 +39,7 @@ class muse:
         self.test_label=[]
         self.matrix=matrix
         self.startpos=startpos
+        self.singlechar=singlechar
         np.random.seed(self.random_state)
         os.environ['PYTHONHASHSEED'] = str(self.random_state)
         random.seed(self.random_state)
@@ -47,7 +48,7 @@ class muse:
         if self.mode=='ASC':
             self.matrix,self.labels,self.detailtable=matrix.ASC(self.original_sequences, self.k, self.original_labels, self.sliding_window)
         elif self.mode=='UWSC':
-            self.matrix,self.labels,self.dfseq,self.detailtable=matrix.UWSC(self.original_sequences, self.k, self.original_labels, self.sliding_window, self.subgroup_size)
+            self.matrix,self.labels,self.dfseq,self.detailtable=matrix.UWSC(self.original_sequences, self.k, self.original_labels, self.sliding_window, self.subgroup_size,singlechar=self.singlechar)
         elif self.mode=='AWSC':
             self.matrix,self.labels,self.positionalkmers,self.detailtable=matrix.AWSC(self.original_sequences, self.k, self.original_labels, self.sliding_window, self.subgroup_size,startpos=self.startpos)
         self.sparcity=(self.matrix > 0).sum()/self.matrix.size
@@ -63,7 +64,7 @@ class muse:
         self.transdata=self.lda.transform(self.matrix)
         self.score=self.lda.score(self.matrix)
         self.topics=self.lda.components_/self.lda.components_.sum(axis=1)[:, np.newaxis]
-        kmers = matrix.generate_kmers(self.k)
+        kmers = matrix.generate_kmers(self.k,self.singlechar)
         self.sampletopic=pd.DataFrame(self.transdata,columns=['topic_' + str(x) for x in list(range(1, self.topic_num + 1))])
         self.sampletopic['label']=self.labels
         #calculate topic prior

@@ -1,5 +1,5 @@
 # Xmuse
-miXture Models for nUcleic acid SequencE analysis. Our paper about using mixture models to analyze sequence features is now [on bioXriv](https://www.biorxiv.org/content/10.1101/2023.12.10.571018v1)!
+miXture Models for nUcleic acid SequencE analysis. Our paper about using mixture models to analyze sequence features is [here](https://academic.oup.com/nargab/article/6/3/lqae099/7730521)!
 
 ## Prerequisite
 - python >=3.7
